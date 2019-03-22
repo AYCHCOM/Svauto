@@ -1,0 +1,5 @@
+- host: localhost
+  become: true
+  
+  roles:
+    - role: yada  
