@@ -1,0 +1,63 @@
+---
+# tasks file for logstash
+- name: install java
+  apt:
+    name: default-jdk 
+
+- name: Add Elasticsearch apt key
+  apt_key:
+   url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+   state: present
+
+# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
+
+- name: Adding Elasticsearch repo
+  apt_repository:
+   repo: deb https://artifacts.elastic.co/packages/{{ es_version }}/apt stable main
+   state: present
+
+# Installing Logstash
+
+- name: Install Logstash
+  apt:
+   name: logstash
+   update_cache: yes
+
+- name: ensure ssl directories exist
+  file:
+    path: "{{ ssl_path }}" 
+    state: directory
+    mode: 0044
+
+- name: ensure SSL certificate exists
+  copy:
+    content: "{{ ssl_cert }}"
+    dest: "{{ ssl_cert_path }}"
+    owner: root
+    group: root
+    mode: 0644
+ 
+- name: ensure SSL key exists
+  copy:
+    content: "{{ ssl_key }}"
+    dest: "{{ ssl_key_path }}" 
+    owner: root
+    group: root
+    mode: 0600
+  no_log: true
+
+- name: render input template
+  template: 
+    src: 02-beats-input.conf.j2
+    dest: /etc/logstash/conf.d/02-beats-input.conf
+
+- name: render filter template
+  template:
+    src: 10-syslog-filter.conf.j2
+    dest: /etc/logstash/conf.d/10-syslog-filter.conf
+
+- name: render output template
+  template:
+    src: 30-elasticsearch-output.conf.j2
+    dest: /etc/logstash/conf.d/30-elasticsearch-output.conf
+ 
