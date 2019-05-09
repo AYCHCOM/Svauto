@@ -23,29 +23,6 @@
    name: logstash
    update_cache: yes
 
-- name: ensure ssl directories exist
-  file:
-    path: "{{ ssl_path }}" 
-    state: directory
-    mode: 0044
-
-- name: ensure SSL certificate exists
-  copy:
-    content: "{{ ssl_cert }}"
-    dest: "{{ ssl_cert_path }}"
-    owner: root
-    group: root
-    mode: 0644
- 
-- name: ensure SSL key exists
-  copy:
-    content: "{{ ssl_key }}"
-    dest: "{{ ssl_key_path }}" 
-    owner: root
-    group: root
-    mode: 0600
-  no_log: true
-
 - name: render input template
   template: 
     src: 02-beats-input.conf.j2
