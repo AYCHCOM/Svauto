@@ -1,7 +1,7 @@
 ---
 # handlers file for logstash
-- name: reload logstash
+- name: restart logstash
   systemd: 
-    state: reloaded
+    state: restarted
     name: logstash
     enabled: yes
