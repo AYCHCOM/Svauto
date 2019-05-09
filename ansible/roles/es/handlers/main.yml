@@ -4,3 +4,4 @@
   systemd:
     state: restarted
     name: elasticsearch
+    enabled: yes
