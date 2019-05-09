@@ -26,6 +26,7 @@
    update_cache: yes
  
 - name: render elasticsearch template
+  template:
     src: elasticsearch.yml.j2
     dest: /etc/elasticsearch/elasticsearch.yml
-  handler: restart elasticsearch
+  notify: restart elasticsearch

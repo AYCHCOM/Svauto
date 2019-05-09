@@ -1,6 +1,6 @@
 ---
 # defaults file for es
-es_port: 9200
-path.data: "/var/lib/elasticsearch"
-path.logs: "/var/log/elasticsearch"
-network.host: "0.0.0.0"
+http_port: 9200
+path_data: "/var/lib/elasticsearch"
+path_logs: "/var/log/elasticsearch"
+network_host: "0.0.0.0"
