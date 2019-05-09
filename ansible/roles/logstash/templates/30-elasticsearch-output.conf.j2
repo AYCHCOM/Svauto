@@ -3,7 +3,6 @@ output {
     hosts => ["{{ es_endpoint }}"]
     sniffing => true
     manage_template => false
-    index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
-    document_type => "%{[@metadata][type]}"
+    index => "logs-%{+YYYY.MM.dd}"
   }
 }
