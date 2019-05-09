@@ -1,2 +1,4 @@
 ---
 # defaults file for logstash
+es_version: "6.x"
+es_endpoint: "http://localhost:9200"
