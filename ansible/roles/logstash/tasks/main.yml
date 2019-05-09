@@ -27,14 +27,16 @@
   template: 
     src: 02-beats-input.conf.j2
     dest: /etc/logstash/conf.d/02-beats-input.conf
+  notify: reload logstash
 
 - name: render filter template
   template:
     src: 10-syslog-filter.conf.j2
     dest: /etc/logstash/conf.d/10-syslog-filter.conf
+  notify: reload logstash
 
 - name: render output template
   template:
     src: 30-elasticsearch-output.conf.j2
     dest: /etc/logstash/conf.d/30-elasticsearch-output.conf
- 
+  notify: reload logstash
