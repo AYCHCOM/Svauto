@@ -4,6 +4,9 @@
 - name: include pre-flight check
   include: pre_flight.yml
 
+- name: inculude swap.yml
+  include: swap.yml
+
 - name: install java
   apt:
     name: default-jdk 
