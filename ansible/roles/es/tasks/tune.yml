@@ -11,4 +11,4 @@
 - name: ensire java heap size environment variable is set in /etc/environment
   lineinfile:
     path: /etc/environment
-    line: "export ES_HEAP_SIZE={{ es_heap_size }}"
+    line: "ES_HEAP_SIZE={{ es_heap_size }}"
