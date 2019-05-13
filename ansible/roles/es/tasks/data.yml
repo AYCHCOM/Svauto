@@ -1,0 +1,23 @@
+- name: ensure path_data exists
+  file:
+    path: "{{ path_data }}"
+    state: directory
+
+- name: create partition
+  parted:
+    device: "{{ data_drive }}"
+    number: 1
+    label: gpt
+    state: present
+
+- name: create ext4 filesystem on ES data drive
+  filesystem:
+    fstype: ext4
+    dev: "{{ data_drive }}1"
+
+- name: mount data drive
+  mount:
+    path: "{{ path_data }}"
+    src: "{{ data_drive }}1"
+    fstype: ext4
+    state: mounted
