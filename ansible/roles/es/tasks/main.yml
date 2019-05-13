@@ -1,6 +1,8 @@
 ---
 # tasks file for es
 #
+- name: include pre-flight check
+  include: pre_flight.yml
 
 - name: install java
   apt:

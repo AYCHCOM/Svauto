@@ -1,0 +1,10 @@
+- name: check if required variables are set
+  fail:
+    msg: '{{ item }} varible is not defined'
+  when: 'item not in vars'
+  with_items:
+    - http_port
+    - path_data
+    - path_logs
+    - network_host
+    - node_name

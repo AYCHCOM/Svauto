@@ -1,6 +1,8 @@
 ---
 # defaults file for es
+cluster_name: "es_logs"
 http_port: 9200
 path_data: "/var/lib/elasticsearch"
 path_logs: "/var/log/elasticsearch"
 network_host: "0.0.0.0"
+node_name: "{{ hostvars[inventory_hostname]['ansible_nodename'] }}"
