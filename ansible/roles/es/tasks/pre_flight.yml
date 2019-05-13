@@ -1,10 +1,13 @@
 - name: check if required variables are set
   fail:
-    msg: '{{ item }} varible is not defined'
-  when: 'item not in vars'
+    msg: '{{ item.var_name }} variable is not defined. {{ item.var_msg }}'
+  when: 'item.var_name not in vars'
   with_items:
-    - http_port
-    - path_data
-    - path_logs
-    - network_host
-    - node_name
+    - { var_name: http_port, var_msg: "Set this variable to define the ES port." }
+    - { var_name: data_drive, var_msg: "Set this variable to define the drive (/dev/sdx) for data storage."}  
+    - { var_name: path_data, var_msg: "Set this variable to define the mounting point of data_drive." }
+    - { var_name: path_logs, var_msg: "Set this variable to define the log file path."}
+    - { var_name: network_host, var_msg: "Set this variable to the IP that the host will listen to." }
+    - { var_name: node_name, var_msg: "Set this variable to the node.name. cf. https://www.elastic.co/guide/en/elasticsearch/guide/current/important-configuration-changes.html" }
+    - { var_name: discovery_hosts, var_msg: "Set this variable to discovery.zen.ping.unicast.hosts. cf. https://www.elastic.co/guide/en/elasticsearch/guide/current/important-configuration-changes.html "}
+    - { var_name: es_heap_size, var_msg: "Set this variable to Java Heap Size. cf. https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html" }

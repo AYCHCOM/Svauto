@@ -1,5 +1,6 @@
 - name: disable swap
   shell: swapoff -a
+  changed_when: False
 
 - name: remove swapfile from /etc/fstab
   mount:
