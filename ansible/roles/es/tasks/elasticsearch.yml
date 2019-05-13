@@ -21,6 +21,13 @@
    name: elasticsearch
    update_cache: yes
 
+- name: ensure path_data exists
+  file:
+    path: "{{ path_data }}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+
 - name: render elasticsearch template
   template:
     src: elasticsearch.yml.j2

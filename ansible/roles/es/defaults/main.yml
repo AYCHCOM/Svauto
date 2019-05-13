@@ -7,5 +7,5 @@ path_logs: "/var/log/elasticsearch"
 network_host: "0.0.0.0"
 node_name: "{{ hostvars[inventory_hostname]['ansible_nodename'] }}"
 minimum_master_nodes: 2
-discovery_hosts: "{{ groups['es'] }}"
+discovery_hosts: "[\"{{ groups['es'] | list | join('\",\"') }}\"]"
 es_heap_size: "12g"

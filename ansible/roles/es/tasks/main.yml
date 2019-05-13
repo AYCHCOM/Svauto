@@ -4,6 +4,14 @@
 - name: include pre-flight check
   include: pre_flight.yml
 
+- name: "create hosts file"
+  lineinfile: 
+    dest: /etc/hosts 
+    regexp: '.*{{ item }}$' 
+    line: "{{ hostvars[item].ansible_host }} {{item}}" 
+    state: present
+  with_items: "{{ groups['es'] }}"
+
 - name: include tune.yml
   include: tune.yml
 
