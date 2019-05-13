@@ -4,34 +4,11 @@
 - name: include pre-flight check
   include: pre_flight.yml
 
-- name: inculude swap.yml
-  include: swap.yml
+- name: include tune.yml
+  include: tune.yml
 
-- name: install java
-  apt:
-    name: default-jdk 
+- name: include data.yml (prepare data drive)
+  include: data.yml
 
-- name: Add Elasticsearch apt key
-  apt_key:
-   url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
-   state: present
-
-# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
-
-- name: Adding Elasticsearch repo
-  apt_repository:
-   repo: deb https://artifacts.elastic.co/packages/{{ es_version }}/apt stable main
-   state: present
-
-# Installing Elasticsearch
-
-- name: Install Elasticsearch
-  apt:
-   name: elasticsearch
-   update_cache: yes
- 
-- name: render elasticsearch template
-  template:
-    src: elasticsearch.yml.j2
-    dest: /etc/elasticsearch/elasticsearch.yml
-  notify: restart elasticsearch
+- name: include elasticsearch.yml
+  include: elasticsearch.yml

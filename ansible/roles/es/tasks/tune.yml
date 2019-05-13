@@ -1,0 +1,13 @@
+- name: disable swap
+  shell: swapoff -a
+
+- name: remove swapfile from /etc/fstab
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+- name: ensire java heap size environment variable is set in /etc/environment
+  lineinfile:
+    path: /etc/environment
+    line: "export ES_HEAP_SIZE={{ es_heap_size }}"
