@@ -1,0 +1,19 @@
+---
+# tasks file for filebeat
+
+- name: "create hosts file"
+  lineinfile: 
+    dest: /etc/hosts 
+    regexp: '.*{{ item }}$' 
+    line: "{{ hostvars[item].ansible_host }} {{item}}" 
+    state: present
+  with_items: "{{ groups['elk'] }}"
+
+- name: include install.yml
+  include: install.yml
+
+- name: render filebeattemplate
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+  notify: restart filebeat

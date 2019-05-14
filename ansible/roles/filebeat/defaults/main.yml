@@ -1,0 +1,9 @@
+---
+# defaults file for filebeat
+prospectors:
+  - path:
+    - /var/log/syslog
+    - /var/log/*.log
+    document_type: syslog
+    scan_frequency: 5s
+logstash_hosts: "[\"{{ groups['logstash'] | list | join('\",\"') }}\"]" 
