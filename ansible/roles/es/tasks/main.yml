@@ -12,6 +12,10 @@
     state: present
   with_items: "{{ groups['es'] }}"
 
+- name: set hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
 - name: include tune.yml
   include: tune.yml
 
