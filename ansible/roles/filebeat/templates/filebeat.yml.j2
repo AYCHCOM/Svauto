@@ -1,25 +1,29 @@
 filebeat:
-  prospectors:
-{% for prospector in prospectors %}
+  inputs:
+{% for input in inputs %}
     -
       paths:
-{% for path in prospector.path %}
+{% for path in input.path %}
         - {{ path }}
 {% endfor %}
-      input_type: log
-      document_type: {{ prospector.document_type }}
-      scan_frequency: {{ prospector.scan_frequency }}
+      type: log
+      enabled: {{ input.enabled }}
+      scan_frequency: {{ input.scan_frequency }}
+      fields:
+         log_type: {{ input.log_type }}
 {% endfor %}
 
-  registry_file: /var/lib/filebeat/registry
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
 
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
 
 output:
   logstash:
     hosts: {{ logstash_hosts }}
-    bulk_max_size: 2048
-
-shipper:
 
 logging:
   files:
