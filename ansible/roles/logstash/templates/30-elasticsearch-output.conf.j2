@@ -3,6 +3,6 @@ output {
     hosts => ["{{ es_endpoint }}"]
     sniffing => true
     manage_template => false
-    index => "logs-%{+YYYY.MM.dd}"
+    index => "filebeat-%{+YYYY.MM.dd}"
   }
 }
