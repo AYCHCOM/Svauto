@@ -1,0 +1,17 @@
+---
+# tasks file for syslog-client- lineinfile:
+- name: ensure that rsyslog is installed
+  apt:
+    name: rsyslog
+    state: present
+
+- name: ensure that rsylog is configured to ship logs to the server
+  lineinfile:
+    path: /etc/rsyslog.conf
+    line: '*.*                       @{{ hostvars[groups["syslog"][0]].ansible_host }}:514'
+    create: yes
+
+- name: ensure rsyslog is restarted
+  service:
+    name: rsyslog
+    state: restarted
