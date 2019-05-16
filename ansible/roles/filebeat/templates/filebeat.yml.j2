@@ -9,9 +9,10 @@ filebeat:
       type: log
       enabled: {{ input.enabled }}
       scan_frequency: {{ input.scan_frequency }}
-      fields:
-         log_type: {{ input.log_type }}
 {% endfor %}
+
+recursive_glob:
+  enabled: True
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml

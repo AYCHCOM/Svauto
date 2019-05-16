@@ -3,8 +3,7 @@
 inputs:
   - path:
       - /var/log/syslog
-      - /var/log/*.log
-    document_type: syslog
+      - /var/log/remote/*
     scan_frequency: 5s
     enabled: true
     log_type: syslog
