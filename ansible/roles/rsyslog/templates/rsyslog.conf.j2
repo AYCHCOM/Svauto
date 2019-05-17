@@ -65,6 +65,6 @@ $WorkDirectory /var/spool/rsyslog
 #
 $IncludeConfig /etc/rsyslog.d/*.conf
 
-$template remote-incoming-logs,"/var/log/%HOSTNAME%/%PROGRAMNAME%.log" 
+$template remote-incoming-logs,"/var/log/remote/%HOSTNAME%/%PROGRAMNAME%.log" 
 *.* ?remote-incoming-logs
 & ~
