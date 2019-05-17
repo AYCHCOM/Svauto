@@ -38,7 +38,7 @@
   lineinfile:
    destfile: /etc/kibana/kibana.yml
    regexp: 'elasticsearch.url:'
-   line: 'elasticsearch.url: "{{ es_endpoint }}"'
+   line: 'elasticsearch.hosts: ["{{ es_endpoint }}"]'
    
 # Starting Kibana
 
