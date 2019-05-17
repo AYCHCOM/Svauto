@@ -1,0 +1,24 @@
+---
+# tasks file for cerebro
+
+- name: download and install cerebro debian package
+  apt:
+    deb: https://github.com/lmenezes/cerebro/releases/download/v0.8.3/cerebro_0.8.3_all.deb
+
+- name: install java
+  apt:
+    name: default-jdk
+
+- name: set database to the correct directory
+  lineinfile:
+    path: /etc/cerebro/application.conf
+    regex: "^data.path"
+    line: "data.path:  \"/var/lib/cerebro/cerebro.db\""
+  notify: restart cerebro
+
+- name: insert elasticsearch endpoint
+  lineinfile:
+    path: /etc/cerebro/application.conf
+    insertafter: 'host = '
+    line: "\"http://{{ hostvars[groups['es'][0]].ansible_host }}:{{ es_port }}\""
+  notify: restart cerebro

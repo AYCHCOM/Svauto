@@ -1,0 +1,6 @@
+---
+# handlers file for cerebro
+- name: restart cerebro
+  service:
+    name: cerebro
+    state: restarted
