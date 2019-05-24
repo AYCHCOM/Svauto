@@ -3,11 +3,13 @@
 workgroup = {{ workgroup }}
 log file = /var/log/samba/%m
 log level = 1
+netbios name = storage server
 
 {% for share in samba_share %}
 [{{ share.name }}]
     path = {{ share.path }}
     valid users = {{ share.valid_users }}
     writeable = {{ share.writeable }}
-
+    create mask = 0770
+    directory mask = 0770
 {% endfor %}
